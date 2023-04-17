@@ -43,6 +43,12 @@ import DialogueBoxPsych;
 import Discord;
 #end
 
+#if hscript
+import hscript.Parser;
+import hscript.Interp;
+import hscript.Expr;
+#end
+
 using StringTools;
 
 class FunkinLua {
