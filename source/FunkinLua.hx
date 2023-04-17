@@ -1957,6 +1957,48 @@ Lua_helper.add_callback(lua, "clearShadersFromCamera", function(cameraName)
 		return (new ChromaticAberrationEffect());
 	}
 
+	#if hscript
+	public function initHaxeModule()
+	{
+		if(hscript == null)
+		{
+			trace('initializing haxe interp for: $scriptName');
+			hscript = new HScript(); //TO DO: Fix issue with 2 scripts not being able to use the same variable names
+		}
+	}
+	#end
+
+	#if hscript
+	public function initHaxeModule()
+	{
+		if(hscript == null)
+		{
+			trace('initializing haxe interp for: $scriptName');
+			hscript = new HScript(); //TO DO: Fix issue with 2 scripts not being able to use the same variable names
+		}
+	}
+	#end
+
+	function getErrorMessage(status:Int):String {
+		#if LUA_ALLOWED
+		var v:String = Lua.tostring(lua, -1);
+		Lua.pop(lua, 1);
+
+		if (v != null) v = v.trim();
+		if (v == null || v == "") {
+			switch(status) {
+				case Lua.LUA_ERRRUN: return "Runtime Error";
+				case Lua.LUA_ERRMEM: return "Memory Allocation Error";
+				case Lua.LUA_ERRERR: return "Critical Error";
+			}
+			return "Unknown Error";
+		}
+
+		return v;
+		#end
+		return null;
+	}
+
 	public function luaTrace(text:String, ignoreCheck:Bool = false, deprecated:Bool = false) {
 		#if LUA_ALLOWED
 		if(ignoreCheck || getBool('luaDebugMode')) {
@@ -1968,7 +2010,8 @@ Lua_helper.add_callback(lua, "clearShadersFromCamera", function(cameraName)
 		}
 		#end
 	}
-	
+
+	var lastCalledFunction:String = '';
 	public function call(event:String, args:Array<Dynamic>):Dynamic {
 		#if LUA_ALLOWED
 		if(lua == null) {
