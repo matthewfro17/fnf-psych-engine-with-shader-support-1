@@ -1957,6 +1957,15 @@ Lua_helper.add_callback(lua, "clearShadersFromCamera", function(cameraName)
 		return (new ChromaticAberrationEffect());
 	}
 
+	public static function isOfTypes(value:Any, types:Array<Dynamic>)
+	{
+		for (type in types)
+		{
+			if(Std.isOfType(value, type)) return true;
+		}
+		return false;
+	}
+
 	#if hscript
 	public function initHaxeModule()
 	{
