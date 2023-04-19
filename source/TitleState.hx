@@ -100,14 +100,14 @@ class TitleState extends MusicBeatState
 		#end
 		
 		#if (desktop && MODS_ALLOWED)
-		var path = "mods/" + Paths.currentModDirectory + "/images/gfDanceTitle.json";
+		var path = "mods/" + Paths.currentModDirectory + "/images/Title/title.json";
 		//trace(path, FileSystem.exists(path));
 		if (!FileSystem.exists(path)) {
-			path = "mods/images/gfDanceTitle.json";
+			path = "mods/images/Title/title.json";
 		}
 		//trace(path, FileSystem.exists(path));
 		if (!FileSystem.exists(path)) {
-			path = "assets/images/gfDanceTitle.json";
+			path = "assets/images/Title/title.json";
 		}
 		//trace(path, FileSystem.exists(path));
 		titleJSON = Json.parse(File.getContent(path));
@@ -301,7 +301,7 @@ class TitleState extends MusicBeatState
 			gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
 		
 		#if (desktop && MODS_ALLOWED)
-		var path = "mods/" + Paths.currentModDirectory + "/images/gfDanceTitle.png";
+		var path = "mods/" + Paths.currentModDirectory + "/images/Title/Title_Dudes.png";
 		//trace(path, FileSystem.exists(path));
 		if (!FileSystem.exists(path)){
 			path = "mods/images/Title/Title_Dudes.png";
